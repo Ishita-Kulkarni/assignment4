@@ -1,23 +1,38 @@
 # app/operation/operations.py
+from typing import Union, Callable
 
-def add(a, b):
+Number = Union[int, float]
+
+def add(a: Number, b: Number) -> Number:
     return a + b
 
-def subtract(a, b):
+def subtract(a: Number, b: Number) -> Number:
     return a - b
 
-def multiply(a, b):
+def multiply(a: Number, b: Number) -> Number:
     return a * b
 
-def divide(a, b):
+def divide(a: Number, b: Number) -> Number:
     if b == 0:
         raise ZeroDivisionError("Cannot divide by zero.")
     return a / b
 
-# Dictionary for factory
-OPERATION_MAP = {
+def power(a: Number, b: Number) -> Number:
+    # support negative and fractional exponents
+    return pow(a, b)
+
+# Dictionary for factory: include both word keys and symbol keys so callers
+# can use "add" or "+" (and similarly for ** and ^).
+OPERATION_MAP: dict[str, Callable[..., Number]] = {
     "add": add,
+    "+": add,
     "subtract": subtract,
+    "-": subtract,
     "multiply": multiply,
-    "divide": divide
+    "*": multiply,
+    "divide": divide,
+    "/": divide,
+    "power": power,
+    "**": power,
+    "^": power,
 }

@@ -3,6 +3,19 @@
 from ..calculation.calculation_factory import CalculationFactory
 from ..operations.operations import OPERATION_MAP
 
+# app/calculator/calculator.py
+from ..calculation.calculation_factory import CalculationFactory
+
+class Calculator:
+    def __init__(self):
+        self.history = []
+
+    def calculate(self, command: str, a: float, b: float):
+        func = CalculationFactory.get_calculation(command)
+        result = func(a, b)
+        self.history.append(f"{command} {a} {b} = {result}")
+        return result
+
 history = []
 
 def print_help():
