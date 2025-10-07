@@ -1,0 +1,7 @@
+[project]
+name = "professional_calc"
+version = "0.0.0"
+description = "Modular calculator for tests"
+authors = [{name = "You"}]
+readme = "README.md"
+requires-python = ">=3.8"

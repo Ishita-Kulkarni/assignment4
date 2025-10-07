@@ -12,7 +12,8 @@ Exposes:
 try:
     from app.operations.operations import OPERATION_MAP
 except Exception:
-    from app.operation.operations import OPERATION_MAP  # fallback
+    # Fallback for alternate folder name - not executed in normal test runs.
+    from app.operation.operations import OPERATION_MAP  # pragma: no cover
 
 from typing import Callable
 
@@ -24,7 +25,7 @@ class CalculationFactory:
     def get_calculation(op_name: str) -> Operation:
         """
         Return a callable for the given operation name or symbol.
-        Raises KeyError if operation not found (matches test expectations).
+        Raises KeyError if operation not found.
         """
         key = op_name.lower() if isinstance(op_name, str) else op_name
         func = OPERATION_MAP.get(key)
