@@ -8,11 +8,12 @@ Exposes:
 - get_calculation(op_name)       (alias)
 """
 
-# Try to import from either possible operations package name.
+# Try to import from the canonical operations package. If that fails, use the
+# alternate folder name. The fallback branch is intentionally excluded from
+# coverage because CI/test environments standardize on app/operations.
 try:
     from app.operations.operations import OPERATION_MAP
-except Exception:
-    # Fallback for alternate folder name - not executed in normal test runs.
+except Exception:  # pragma: no cover
     from app.operation.operations import OPERATION_MAP  # pragma: no cover
 
 from typing import Callable
